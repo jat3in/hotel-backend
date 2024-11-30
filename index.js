@@ -14,17 +14,17 @@ app.use(express.json({ limit: "20kb" }));
 app.use(express.urlencoded({ extended: true, limit: "20kb" }));
 
 app.post("/send-email", (req,res) => {
-    const {username,email,date,phone,destination} = req.body
+    const {name,email,phone,numberOfMembers} = req.body
 
-    if(!username && !email && !phone){
+    if(!name && !email && !phone){
         return res.status(500).json({message: "All feilds are our required"})
     }
 
     const transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-          user: `${process.env.USER}`,
-          pass: `${process.env.AUTH}`,
+          user: `ramsonstayinn9@gmail.com`,
+          pass: `ugfi lqub uzpk qpqc`,
         },
       });
 
@@ -36,31 +36,27 @@ app.post("/send-email", (req,res) => {
           <th>Value</th>
         </tr>
         <tr>
-          <td>Username</td>
-          <td>${username}</td>
+          <td>Name</td>
+          <td>${name}</td>
         </tr>
         <tr>
           <td>Email</td>
           <td>${email}</td>
         </tr>
         <tr>
-          <td>Date</td>
-          <td>${date}</td>
-        </tr>
-        <tr>
           <td>Phone</td>
           <td>${phone}</td>
         </tr>
         <tr>
-          <td>Destination</td>
-          <td>${destination}</td>
+          <td>No. of members</td>
+          <td>${numberOfMembers}</td>
         </tr>
       </table>
     `;
       const mailOptions = {
-        from: 'jatinvashishtha053@gmail.com',
-        to: 'jatinvashishtha053@gmail.com',
-        subject: `Contact form submission from ${username}`,
+        from: 'ramsonstayinn9@gmail.com',
+        to: 'ramsonstayinn9@gmail.com',
+        subject: `Contact form submission from ${name}`,
         html: emailBody,
       };
 
@@ -74,65 +70,65 @@ app.post("/send-email", (req,res) => {
 })
 
 
-app.put("/send-email", (req,res) => {
-    const {username,email,date,phone,destination} = req.body
+// app.put("/send-email", (req,res) => {
+//     const {username,email,date,phone,destination} = req.body
 
-    if(!username && !email && !phone && !destination){
-        return res.status(500).json({message: "All feilds are our required"})
-    }
+//     if(!username && !email && !phone && !destination){
+//         return res.status(500).json({message: "All feilds are our required"})
+//     }
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-           user: `${process.env.USER}`,
-           pass: `${process.env.AUTH}`,
-        },
-      });
+//     const transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//            user: `${process.env.USER}`,
+//            pass: `${process.env.AUTH}`,
+//         },
+//       });
 
-      const emailBody = `
-      <h2>Form Submission Details</h2>
-      <table border="1" cellpadding="10" cellspacing="0">
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-        <tr>
-          <td>Username</td>
-          <td>${username}</td>
-        </tr>
-        <tr>
-          <td>Email</td>
-          <td>${email}</td>
-        </tr>
-        <tr>
-          <td>Date</td>
-          <td>${date}</td>
-        </tr>
-        <tr>
-          <td>Phone</td>
-          <td>${phone}</td>
-        </tr>
-        <tr>
-          <td>Destination</td>
-          <td>${destination}</td>
-        </tr>
-      </table>
-    `;
-      const mailOptions = {
-        from: 'jatinvashishtha053@gmail.com',
-        to: 'jatinvashishtha053@gmail.com',
-        subject: `Contact form submission from ${username}`,
-        html: emailBody,
-      };
+//       const emailBody = `
+//       <h2>Form Submission Details</h2>
+//       <table border="1" cellpadding="10" cellspacing="0">
+//         <tr>
+//           <th>Field</th>
+//           <th>Value</th>
+//         </tr>
+//         <tr>
+//           <td>Username</td>
+//           <td>${username}</td>
+//         </tr>
+//         <tr>
+//           <td>Email</td>
+//           <td>${email}</td>
+//         </tr>
+//         <tr>
+//           <td>Date</td>
+//           <td>${date}</td>
+//         </tr>
+//         <tr>
+//           <td>Phone</td>
+//           <td>${phone}</td>
+//         </tr>
+//         <tr>
+//           <td>Destination</td>
+//           <td>${destination}</td>
+//         </tr>
+//       </table>
+//     `;
+//       const mailOptions = {
+//         from: 'jatinvashishtha053@gmail.com',
+//         to: 'jatinvashishtha053@gmail.com',
+//         subject: `Contact form submission from ${username}`,
+//         html: emailBody,
+//       };
 
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          return res.status(500).json({message: "form not sended"});
-        }
-        res.status(200).json({message: "Form submitted successfully"});
-      });
+//       transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//           return res.status(500).json({message: "form not sended"});
+//         }
+//         res.status(200).json({message: "Form submitted successfully"});
+//       });
 
-})
+// })
 
 
 
